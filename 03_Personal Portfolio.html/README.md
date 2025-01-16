@@ -1,0 +1,2 @@
+# Personal Portfolio
+The goal of this project is to style a website using CSS. It will take the structure from the previous HTML-only project and apply various CSS techniques to enhance its appearance and responsiveness.
