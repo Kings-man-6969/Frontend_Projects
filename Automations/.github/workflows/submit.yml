@@ -1,0 +1,35 @@
+name: Submit Random LeetCode Problem
+
+on:
+  schedule:
+    - cron: '0 4 * * *'  # Every day at 4 AM UTC
+  workflow_dispatch:
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout automation repo
+      uses: actions/checkout@v3
+
+    - name: Checkout solutions repo
+      uses: actions/checkout@v3
+      with:
+        repository: yourusername/leetcode-solutions
+        path: leetcode-solutions
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Run automation
+      env:
+        LEETCODE_USERNAME: ${{ secrets.LEETCODE_USERNAME }}
+        LEETCODE_PASSWORD: ${{ secrets.LEETCODE_PASSWORD }}
+      run: python submit_from_repo.py
